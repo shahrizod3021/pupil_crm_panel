@@ -1,0 +1,107 @@
+
+.loadingjon .container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+    background-color: hsl(200deg,100%,4%);
+}
+
+.loadingjon .square {
+    width: 30px;
+    height: 30px;
+    rotate: 45deg;
+    border: solid goldenrod 2px;
+    animation: jitter 1.5s ease-in-out infinite;
+    background-color: hsl(200deg,100%,4%);
+}
+
+.loadingjon  .circle {
+    width: 60px;
+    height: 60px;
+    border: dashed goldenrod 2px;
+    border-radius: 50%;
+    animation: smooth 10s linear infinite;
+}
+
+.loadingjon  .centered {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+}
+
+.loadingjon .diamond {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: 0 -50%;
+
+}
+
+.loadingjon .diamond.small {
+    width: 30px;
+    height: 30px;
+    stroke-dasharray: 100;
+    stroke-width: 2px;
+    animation: disappear-small 3s ease-in-out infinite;
+}
+
+.loadingjon .diamond.large {
+    width: 60px;
+    height: 60px;
+    stroke-dasharray: 200;
+    stroek-width: 0.25px;
+    animation: disappear-large 3s ease-in-out infinite;
+}
+
+.loadingjon  .path {
+    stroke: goldenrod;
+    fill: none;
+}
+
+.loadingjon .rotated {
+    transform-origin: left;
+    rotate: 180deg;
+}
+
+@keyframes jitter {
+    0% {
+        rotate: 45deg;
+    }
+    33% {
+        rotate: 135deg;
+    }
+    100% {
+        rotate: 135deg;
+    }
+}
+
+@keyframes smooth {
+    from {
+        rotate: 0deg;
+    }
+    to {
+        rotate: 360deg;
+    }
+}
+
+@keyframes disappear-small {
+    0% {
+        stroke-dashoffset: 100;
+    }
+    100% {
+        stroke-dashoffset: -100;
+    }
+}
+
+@keyframes disappear-large {
+    0% {
+        stroke-dashoffset: 200;
+    }
+    100% {
+        stroke-dashoffset: -200;
+    }
+}
