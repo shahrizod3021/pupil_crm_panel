@@ -1,19 +1,17 @@
-import {GetMyGroup, GetOnePupil} from "../service/Service.js";
+import {GetMyGroup, GetOneTeacher} from "../service/Service.js";
 import {useEffect, useState} from "react";
 import {Loading} from "./Loading.jsx";
-import credit from '../assets/img/icons/unicons/wallet-info.png'
 import {Link} from "react-router-dom";
 
 export const SideBar = () => {
-    const [pupil, setPupil] = useState({})
+    const [teacher, setTeacher] = useState({})
     const [myGroup, setMyGroup] = useState([])
     const [loading, setLoading] = useState(false)
     const getOnePupil = async () => {
-        await GetOnePupil(localStorage.getItem("dataPupil"), setPupil)
-        await GetMyGroup(localStorage.getItem("dataPupil"), setMyGroup)
+        await GetOneTeacher(localStorage.getItem("dataTeacher"), setTeacher)
+        await GetMyGroup(localStorage.getItem("dataTeacher"), setMyGroup)
         setLoading(true)
     }
-
     useEffect(() => {
         getOnePupil()
     }, [])
@@ -21,14 +19,10 @@ export const SideBar = () => {
     function openDrop() {
         document.getElementById('menu-item').classList.toggle('open')
     }
-
-    function openDrop1() {
-        document.getElementById('menu-item1').classList.toggle('open')
-    }
-
     function slideSide() {
         document.getElementById('slide').classList.toggle('layout-menu-expanded')
     }
+
     function openDrop2() {
         document.getElementById('menu-item2').classList.toggle('open')
     }
@@ -39,7 +33,7 @@ export const SideBar = () => {
                 <>
                     <aside id="layout-menu" className="overflow-auto  layout-menu menu-vertical menu bg-menu-theme">
                         <div className="app-brand demo">
-                            <a href="index.html" className="app-brand-link">
+                            <a href="" className="app-brand-link">
               <span className="app-brand-logo demo">
                 <svg
                     width="25"
@@ -86,7 +80,8 @@ export const SideBar = () => {
                   </g>
                 </svg>
               </span>
-                                <span className="app-brand-text demo menu-text fw-bolder ms-2">Sneat</span>
+                                <span className="app-brand-text demo menu-text fw-bolder ms-2">Uteam</span>
+                                <span className="app-brand-text demo menu-text fw-bolder ms-2">CRM</span>
                             </a>
 
                             <a onClick={slideSide} href="#"
@@ -99,14 +94,14 @@ export const SideBar = () => {
 
                         <ul className="menu-inner py-1">
                             <li className="menu-item active">
-                                <a href="index.html" className="menu-link">
+                                <Link to={"/" + teacher.username} className="menu-link">
                                     <i className="menu-icon tf-icons bx bx-home-circle"></i>
                                     <div data-i18n="Analytics">Asosiy bo'lim</div>
-                                </a>
+                                </Link>
                             </li>
 
                             <li className="menu-item">
-                                <Link to={"/" + pupil.username + "/myWallet"} className="menu-link">
+                                <Link to={"/" + teacher.username + "/myWallet"} className="menu-link">
                                     <i className={"menu-icon tf-icons bx bx-wallet"}></i>
                                     <div data-i18n="Layouts">Mening hamyonim</div>
                                 </Link>
@@ -130,24 +125,6 @@ export const SideBar = () => {
                                             </li>
                                         </>
                                     ))}
-                                </ul>
-                            </li>
-                            <li className="menu-item" id={"menu-item1"}>
-                                <a href="#" onClick={openDrop1} className="menu-link menu-toggle">
-                                    <i className="menu-icon tf-icons bx bx-collection"></i>
-                                    <div data-i18n="Authentications">Kurslarim</div>
-                                </a>
-                                <ul className="menu-sub">
-                                    {pupil.courses.map((item) => (
-                                        <>
-                                            <li className="menu-item">
-                                                <a href="auth-login-basic.html" className="menu-link" target="_blank">
-                                                    <div data-i18n="Basic">{item.uzName}</div>
-                                                </a>
-                                            </li>
-                                        </>
-                                    ))}
-
                                 </ul>
                             </li>
                             <li className="menu-item" id={"menu-item2"}>

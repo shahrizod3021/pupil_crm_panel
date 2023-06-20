@@ -1,5 +1,5 @@
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import {PupilLayout} from "./layout/PupilLayout.jsx";
+import {TeacherLayout} from "./layout/TeacherLayout.jsx";
 import {Basic} from "./pages/Basic.jsx";
 import {Login} from "./pages/Login.jsx";
 import {ForbiddenPage} from "./component/ForbiddenPage.jsx";
@@ -11,7 +11,7 @@ export const App = () => {
         <div>
             <BrowserRouter>
                 <Routes>
-                    <Route path={"/:username"} element={<PupilLayout/>}>
+                    <Route path={"/:username"} element={<TeacherLayout/>}>
                         <Route index element={<Basic/>}/>
                         <Route path={"/:username/myWallet"} element={<MyWallet/>}/>
                     </Route>

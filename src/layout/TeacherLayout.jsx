@@ -3,10 +3,10 @@ import {Navbar} from "../component/Navbar.jsx";
 import {ForbiddenPage} from "../component/ForbiddenPage.jsx";
 import {Outlet} from "react-router-dom";
 
-export const PupilLayout = () => {
+export const TeacherLayout = () => {
     return(
         <div className={"layout-wrapper layout-content-navbar"}>
-            {localStorage.getItem("dataPupil") !== null ? (
+            {localStorage.getItem("dataTeacher") !== null ? (
                 <>
                     <div className={"layout-container"}>
                         <SideBar/>

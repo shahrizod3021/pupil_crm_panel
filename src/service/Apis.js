@@ -5,7 +5,8 @@ export const Apis = {
     pupil: '/pupil',
     statistic: '/statistic',
     getContent: BaseUrl + '/download?id=',
-    myMessage:'/myMessage',
-    paymentHistory:'/paymentHistory',
-    group:'/group'
+    myMessage: '/myMessage',
+    paymentHistory: '/paymentHistory',
+    group: '/group',
+    teacher: '/teacher'
 }

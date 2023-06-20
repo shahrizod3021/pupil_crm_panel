@@ -3,29 +3,30 @@ import success from '../assets/img/icons/unicons/cc-success.png'
 import credit from '../assets/img/icons/unicons/wallet-info.png'
 import pay from '../assets/img/icons/unicons/paypal.png'
 import transaction from '../assets/img/icons/unicons/cc-primary.png'
-import {GetOnePupil, MyLastMessage, MyLastMonthPayment, StatisticMyPayment} from "../service/Service.js";
+import {GetOneTeacher, MyLastMessage, MyLastMonthPayment, StatisticMyPayment} from "../service/Service.js";
 import {useEffect, useState} from "react";
 import {Loading} from "../component/Loading.jsx";
 import {Link, useNavigate} from "react-router-dom";
+
 export const Basic = () => {
     const [payment, setPayment] = useState({})
-    const [pupil, setPupil] = useState({})
+    const [teacher, setTeacher] = useState({})
     const [loading, setLoading] = useState(false)
-    const [message, setMessage]= useState({})
+    const [message, setMessage] = useState({})
     const [lastMonthPayment, setLastMonthPayment] = useState([])
     const navigate = useNavigate()
     const myStatisticPayment = async () => {
-        await StatisticMyPayment(localStorage.getItem("dataPupil"), setPayment)
-        await GetOnePupil(localStorage.getItem("dataPupil"), setPupil)
-        await MyLastMessage(localStorage.getItem("dataPupil"), setMessage)
-        await MyLastMonthPayment(localStorage.getItem("dataPupil"), setLastMonthPayment)
+        await StatisticMyPayment(localStorage.getItem("dataTeacher"), setPayment)
+        await GetOneTeacher(localStorage.getItem("dataTeacher"), setTeacher)
+        await MyLastMessage(localStorage.getItem("dataTeacher"), setMessage)
+        await MyLastMonthPayment(localStorage.getItem("dataTeacher"), setLastMonthPayment)
         navigate(localStorage.getItem("path"))
         setLoading(true)
     }
     useEffect(() => {
         myStatisticPayment()
     }, [])
-    return(
+    return (
         <div>
             {loading ? (
                 <div className="container-xxl flex-grow-1 container-p-y">
@@ -35,7 +36,8 @@ export const Basic = () => {
                                 <div className="d-flex align-items-end row">
                                     <div className="col-sm-7">
                                         <div className="card-body">
-                                            <h5 className="card-title text-primary"> {pupil.name}</h5>
+                                            <h3 className="card-title text-primary"> {teacher.data.username}</h3>
+                                            <h5 className="card-title text-primary"> {teacher.data.name}</h5>
                                             <p className="mb-4">
                                                 {message.message}
                                             </p>
@@ -62,7 +64,8 @@ export const Basic = () => {
                                 <div className="col-lg-6 col-md-12 col-6 mb-4">
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="card-title d-flex align-items-start justify-content-between">
+                                            <div
+                                                className="card-title d-flex align-items-start justify-content-between">
                                                 <div className="avatar flex-shrink-0">
                                                     <img
                                                         src={success}
@@ -97,7 +100,8 @@ export const Basic = () => {
                                 <div className="col-lg-6 col-md-12 col-6 mb-4">
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="card-title d-flex align-items-start justify-content-between">
+                                            <div
+                                                className="card-title d-flex align-items-start justify-content-between">
                                                 <div className="avatar flex-shrink-0">
                                                     <img
                                                         src={credit}
@@ -197,7 +201,8 @@ export const Basic = () => {
                                 <div className="col-6 mb-4">
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="card-title d-flex align-items-start justify-content-between">
+                                            <div
+                                                className="card-title d-flex align-items-start justify-content-between">
                                                 <div className="avatar flex-shrink-0">
                                                     <img src={pay} alt="Credit Card"
                                                          className="rounded"/>
@@ -229,7 +234,8 @@ export const Basic = () => {
                                 <div className="col-6 mb-4">
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="card-title d-flex align-items-start justify-content-between">
+                                            <div
+                                                className="card-title d-flex align-items-start justify-content-between">
                                                 <div className="avatar flex-shrink-0">
                                                     <img src={transaction} alt="Credit Card"
                                                          className="rounded"/>
@@ -260,13 +266,15 @@ export const Basic = () => {
                                 <div className="col-12 mb-4">
                                     <div className="card">
                                         <div className="card-body">
-                                            <div className="d-flex justify-content-between flex-sm-row flex-column gap-3">
+                                            <div
+                                                className="d-flex justify-content-between flex-sm-row flex-column gap-3">
                                                 <div
                                                     className="d-flex flex-sm-column flex-row align-items-start justify-content-between">
                                                     <div className="card-title">
-                                                        <h5 className="text-nowrap mb-2">Shu paytgacha to'lov qilindi</h5>
+                                                        <h5 className="text-nowrap mb-2">Shu paytgacha to'lov
+                                                            qilindi</h5>
                                                         <span
-                                                            className="badge bg-label-warning rounded-pill">{pupil.createdAt.substring(0, 4)}-yildan beri</span>
+                                                            className="badge bg-label-warning rounded-pill">{teacher.data.createdAt.substring(0, 10)}-yildan beri</span>
                                                     </div>
                                                     <div className="mt-sm-auto">
                                                         <h3 className="mb-0">{payment.ketganHarajat} usz</h3>
@@ -299,7 +307,8 @@ export const Basic = () => {
                                         >
                                             <i className="bx bx-dots-vertical-rounded"></i>
                                         </button>
-                                        <div className="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
+                                        <div className="dropdown-menu dropdown-menu-end"
+                                             aria-labelledby="orederStatistics">
                                             <a className="dropdown-item" href="#">Select All</a>
                                             <a className="dropdown-item" href="#">Refresh</a>
                                             <a className="dropdown-item" href="#">Share</a>
@@ -461,9 +470,14 @@ export const Basic = () => {
                                         >
                                             <i className="bx bx-dots-vertical-rounded"></i>
                                         </button>
-                                        <div className="dropdown-menu dropdown-menu-end" aria-labelledby="transactionID">
-                                            <Link className="dropdown-item" to={"/" + pupil.username + "/myWallet"}>O'tgan oy</Link>
-                                            <Link className="dropdown-item" to={"/" + pupil.username + "/myWallet"}>Barcha to'lovlar</Link>
+                                        <div className="dropdown-menu dropdown-menu-end"
+                                             aria-labelledby="transactionID">
+                                            <Link className="dropdown-item"
+                                                  to={"/" + teacher.data.username + "/myWallet"}>O'tgan
+                                                oy</Link>
+                                            <Link className="dropdown-item"
+                                                  to={"/" + teacher.data.username + "/myWallet"}>Barcha
+                                                to'lovlar</Link>
                                         </div>
                                     </div>
                                 </div>
@@ -491,10 +505,12 @@ export const Basic = () => {
                                                             <div
                                                                 className="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                                                 <div className="me-2">
-                                                                    <small className="text-muted d-block mb-1 ">To'lov turi: {item.payTypeName}</small>
+                                                                    <small className="text-muted d-block mb-1 ">To'lov
+                                                                        turi: {item.payTypeName}</small>
                                                                     <h6 className="mb-0">id: {item.historyId}</h6>
                                                                 </div>
-                                                                <div className="user-progress d-flex align-items-center gap-1">
+                                                                <div
+                                                                    className="user-progress d-flex align-items-center gap-1">
                                                                     <h6 className="mb-0 text-success">{item.howMuch}</h6>
                                                                     <span className="text-success">USZ</span>
                                                                 </div>
